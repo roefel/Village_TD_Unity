@@ -8,19 +8,21 @@ using UnityEngine.UI;
 
 namespace Village_TD
 {
-    class Building:MonoBehaviour //abstract zorgt ervoor dat er geen nieuwe instanties van building gemaakt kunnen worden.
+    class Building:MonoBehaviour
     {
         private int level; //int level for each building, start level=1
         public Text levelText; // variable of type text, used in unity to display text
         public Text buttonText;
+        public Text resourceCostsText;
         public Button upgradeButton;    //variable of type Button, used for changing the button state in Unity
         
-        public int initialClayCostForUpgrade = 10;  //initial cost per material. This can be modified individually.
-        public int initialIronCostForUpgrade = 10;
-        public int initialWoodCostForUpgrade = 10;
+        
+        private int initialClayCostForUpgrade = 11;  //initial cost per material. This can be modified individually.
+        private int initialIronCostForUpgrade = 9;
+        private int initialWoodCostForUpgrade = 10;
         public int initialWorkersPerLevel = 2;
         private int multiplierInitialCost;          //Multiplier that is used to calulate the cost of each material for each level
-        public void multiplierForEachBuildingLevel()
+        public void multiplierInitialCostAlgorythm()
         {
 
             Double LevelDouble = Convert.ToDouble(Level);  //convert int Level to Double for use in math.pow
@@ -41,6 +43,7 @@ namespace Village_TD
         {
             level = 1;  
             setLevelText();
+            setResourceCost();
         }
 
 
@@ -63,15 +66,28 @@ namespace Village_TD
             }
 
         }
-        
-         public void upgrade()    //method to upgrade a building
+        void setCostText()
         {
-            multiplierForEachBuildingLevel();   //calls to calculate the multiplier for the building level
+            
+            resourceCostsText.text = "Clay[" + resourceCost[0].ToString() + "] Iron[" + resourceCost[1] + "] Wood[" + resourceCost[2] + "]";
+        }
+
+        void setResourceCost()
+        {
+            multiplierInitialCostAlgorythm();   //calls to calculate the multiplier for the building level
             resourceCost[0] = initialClayCostForUpgrade * multiplierInitialCost;    //calculates the cost of each resource
             resourceCost[1] = initialIronCostForUpgrade * multiplierInitialCost;
             resourceCost[2] = initialWoodCostForUpgrade * multiplierInitialCost;
+            setCostText();
+        }
+
+         public void upgrade()    //method to upgrade a building
+        {
+           
             
-            int numberOfClay = GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource; //??? calls for the variable NumberOfResources so it can be used to check if there are enough resources to upgrade
+            
+            
+            int numberOfClay = GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource; //calls for the variable NumberOfResources so it can be used to check if there are enough resources to upgrade
             int numberOfIron = GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource;
             int numberOfWood = GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource;
             if (numberOfClay>=resourceCost[0] && numberOfIron>= resourceCost[1] && numberOfWood>=resourceCost[2]) //checks each resource for a sufficient amount of given resources 
@@ -80,6 +96,7 @@ namespace Village_TD
                 GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= resourceCost[1];
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= resourceCost[2];
                 Level ++;
+                setResourceCost();
 
             }
 

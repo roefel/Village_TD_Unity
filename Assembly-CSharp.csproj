@@ -6,7 +6,7 @@
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
 	<RootNamespace></RootNamespace>
-	<ProjectGuid>{AAE4AC30-B378-9165-EF6F-5083503B32A4}</ProjectGuid>
+	<ProjectGuid>{23E6D13C-56FB-C4E7-E9C8-6066DB14AD71}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<AssemblyName>Assembly-CSharp</AssemblyName>
@@ -59,7 +59,6 @@
      <Compile Include="Assets\Village_TD\Persons\Person.cs" />
      <Compile Include="Assets\Village_TD\Persons\Swordfighter.cs" />
      <Compile Include="Assets\Village_TD\Persons\Worker.cs" />
-     <Compile Include="Assets\Village_TD\Program.cs" />
      <Compile Include="Assets\Village_TD\Properties\AssemblyInfo.cs" />
      <Compile Include="Assets\Village_TD\Timer.cs" />
      <Compile Include="Assets\Village_TD\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
