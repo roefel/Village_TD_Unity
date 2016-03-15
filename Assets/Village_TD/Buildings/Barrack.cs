@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Village_TD
 {
     class Barrack:Building
     {
         private int swordfighters; //temporary
+        public string numberToCreateSwordfighters;
+        public string numberToCreateArchers;
+        public string numberToCreateKnights;
         public override int maxLevel()
         {
-            return 3;
+            return 3; // The number 3 is dependable on the number of unique type of troops, 1 type is unlocked each level
         }
 
         public int Swordfighters
@@ -27,10 +31,21 @@ namespace Village_TD
             }
         }
 
-        public int createSwordfighter()
+
+        public void createSwordfighter()
         {
-            Swordfighters++;    //++ kan eventueel vervangen worden door het ingegeven aantal door de player
-            return Swordfighters;
+
+            
+        }
+
+        public void createArcher()
+        {
+
+        }
+
+        public void createKnight()
+        {
+
         }
     }
 }

@@ -53,6 +53,9 @@
      <Compile Include="Assets\Village_TD\Buildings\Warehouse.cs" />
      <Compile Include="Assets\Village_TD\Buildings\clayPit.cs" />
      <Compile Include="Assets\Village_TD\Buildings\ironMine.cs" />
+     <Compile Include="Assets\Village_TD\InputFieldArchers.cs" />
+     <Compile Include="Assets\Village_TD\InputFieldKnights.cs" />
+     <Compile Include="Assets\Village_TD\InputFieldSwordfighters.cs" />
      <Compile Include="Assets\Village_TD\Persons\Archer.cs" />
      <Compile Include="Assets\Village_TD\Persons\Combatant.cs" />
      <Compile Include="Assets\Village_TD\Persons\Knight.cs" />
