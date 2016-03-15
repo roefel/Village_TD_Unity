@@ -21,12 +21,12 @@ namespace Village_TD
             set{ amTroops = value; }
         }
 
-        void sumOfTroops()
-        {
-            AmTroops = GameObject.Find("amSwordfighters").GetComponent<Swordfighter>().amSwordfighters  // som van aantal zwaardvechters
-            + GameObject.Find("amArchers").GetComponent<Archer>().amArchers                             // + aantal boogschutters
-            + GameObject.Find("amKnights").GetComponent<Knight>().amKnights;                            // + aantal ridders
-        }
+        //void sumOfTroops()
+        //{
+        //    AmTroops = GameObject.Find("amSwordfighters").GetComponent<Swordfighter>().amSwordfighters  // som van aantal zwaardvechters
+        //    + GameObject.Find("amArchers").GetComponent<Archer>().amArchers                             // + aantal boogschutters
+        //    + GameObject.Find("amKnights").GetComponent<Knight>().amKnights;                            // + aantal ridders
+        //}
 
 
     }

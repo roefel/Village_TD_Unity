@@ -35,16 +35,19 @@ namespace Village_TD
         public void createSwordfighter()
         {
 
-            
+            GameObject.Find("Swordfighters").GetComponent<Swordfighter>().amSwordfighters += Convert.ToInt32(numberToCreateSwordfighters);
+            Debug.Log(GameObject.Find("Swordfighters").GetComponent<Swordfighter>().amSwordfighters);
         }
-
+        
         public void createArcher()
         {
+            GameObject.Find("Archers").GetComponent<Archer>().amArchers += Convert.ToInt32(numberToCreateArchers);
 
         }
 
         public void createKnight()
         {
+            GameObject.Find("Knights").GetComponent<Knight>().amKnights += Convert.ToInt32(numberToCreateKnights);
 
         }
     }

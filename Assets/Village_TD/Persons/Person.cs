@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Village_TD
 {
-    class Person
+    class Person : MonoBehaviour
     {
         private int amPopulation;
         
@@ -15,9 +15,9 @@ namespace Village_TD
             set{ amPopulation = value; }
         }
         
-        void Start() {
-            AmPopulation = GameObject.Find("amTroops").GetComponent<Combatant>().AmTroops
-            + GameObject.Find("amWorkers").GetComponent<Worker>().AmWorkers;
-        }
+        //void Start() {
+        //    AmPopulation = GameObject.Find("amTroops").GetComponent<Combatant>().AmTroops
+        //    + GameObject.Find("amWorkers").GetComponent<Worker>().AmWorkers;
+        //}
     }
 }
