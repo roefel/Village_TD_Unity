@@ -27,12 +27,12 @@ namespace Village_TD
         new void Start()    //method to show the current maxcapacity in unity at the start of the game
         {
             base.Start();   //does what the superclass method Start() does
-            maxCapacity.text = "Maximum capacity: " + MaxStorage.ToString();  
+            maxCapacity.text = "Maximum storage capacity: " + MaxStorage.ToString();  
         }
         new void upgrade()  //method to show the current maxcapacity in unity after an upgrade
         {
             base.upgrade();
-            maxCapacity.text = "Maximum capacity: " + MaxStorage.ToString();
+            maxCapacity.text = "Maximum storage capacity: " + MaxStorage.ToString();
         }
         
         
