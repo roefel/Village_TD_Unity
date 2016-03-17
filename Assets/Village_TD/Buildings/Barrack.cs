@@ -4,32 +4,25 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Village_TD
 {
     class Barrack:Building
     {
-        private int swordfighters; //temporary
+        
         public string numberToCreateSwordfighters;
         public string numberToCreateArchers;
         public string numberToCreateKnights;
+
+        public GameObject InputSwordFighter;
+
         public override int maxLevel()
         {
             return 3; // The number 3 is dependable on the number of unique type of troops, 1 type is unlocked each level
         }
 
-        public int Swordfighters
-        {
-            get
-            {
-                return swordfighters;
-            }
 
-            set
-            {
-                swordfighters = value;
-            }
-        }
 
 
         public void createSwordfighter()
@@ -37,8 +30,16 @@ namespace Village_TD
 
             GameObject.Find("Swordfighters").GetComponent<Swordfighter>().amSwordfighters += Convert.ToInt32(numberToCreateSwordfighters);
             Debug.Log(GameObject.Find("Swordfighters").GetComponent<Swordfighter>().amSwordfighters);
+
         }
-        
+        public void inputFieldSwordFighters()
+        {
+
+            numberToCreateSwordfighters = InputSwordFighter.GetComponent<InputField>().text;
+            Debug.Log(numberToCreateSwordfighters);
+
+        }
+
         public void createArcher()
         {
             GameObject.Find("Archers").GetComponent<Archer>().amArchers += Convert.ToInt32(numberToCreateArchers);
