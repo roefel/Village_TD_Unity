@@ -13,21 +13,38 @@ namespace Village_TD
         private int numSwordfighters;   //temporary value
         private int numArchers;         //temporary value
         private int numKnights;         //temporary value
-        private int[] swordfighterCost = { 75, 80, 60 };
-        private int[] archerCost = { 70, 100, 150 };
-        private int[] knightCost = { 200, 350, 250 };
+
+        public Text numSwordfightersText;
+        public Text numArchersText;
+        public Text numKnightsText;
+        public Text swordfightersCost;
+        public Text archersCost;
+        public Text knightsCost;
+
+
+        private readonly int[] swordfighterCost = { 75, 80, 60 }; //element 0 = clay, element 1 = iron, element 2 = wood
+        private readonly int[] archerCost = { 70, 100, 150 };
+        private readonly int[] knightCost = { 200, 350, 250 };
 
         public GameObject InputSwordFighter;
         public GameObject InputArcher;
         public GameObject InputKnight;
 
-        public string numberToCreateSwordfighters;
-        public string numberToCreateArchers;
-        public string numberToCreateKnights;
+        private string numberToCreateSwordfighters;
+        private string numberToCreateArchers;
+        private string numberToCreateKnights;
 
         int numberOfClay;
         int numberOfIron;
         int numberOfWood;
+
+        new void Start()
+        {
+            base.Start();
+            NumSwordfighters = 0;
+            NumArchers = 0;
+            NumKnights = 0;
+        }
 
         public override int maxLevel()
         {
@@ -37,37 +54,38 @@ namespace Village_TD
         public int NumSwordfighters
         {
             get{ return numSwordfighters; }
-            set{ numSwordfighters = value; }
+            set
+            {
+                numSwordfighters = value;
+                setTroopsText();
+            }
         }
 
         public int NumArchers
         {
             get { return numArchers; }
-            set { numArchers = value; }
+            set
+            {
+                numArchers = value;
+                setTroopsText();
+            }
         }
 
         public int NumKnights
         {
             get { return numKnights; }
-            set { numKnights = value; }
+            set
+            {
+                numKnights = value;
+                setTroopsText();
+            }
         }
 
-        public int[] SwordfighterCost
+        void setTroopsText()
         {
-            get { return swordfighterCost; }
-            set { swordfighterCost = value; }
-        }
-
-        public int[] ArcherCost
-        {
-            get { return archerCost; }
-            set { archerCost = value; }
-        }
-
-        public int[] KnightCost
-        {
-            get { return knightCost; }
-            set { knightCost = value; }
+            numSwordfightersText.text = NumSwordfighters.ToString();
+            numArchersText.text = NumArchers.ToString();
+            numKnightsText.text = NumKnights.ToString();
         }
 
         public void createSwordfighter()
@@ -144,9 +162,14 @@ namespace Village_TD
 
         void getResources()
         {
-            numberOfClay = GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource; //calls for the variable NumberOfResources 
+            numberOfClay = GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource; //calls for the variable NumberOfResource 
             numberOfIron = GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource;
             numberOfWood = GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource;
+        }
+
+        public void setTroopsCostText()
+        {
+
         }
     }
 }
