@@ -387,7 +387,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 115572915}
-  - 114: {fileID: 115572916}
   m_Layer: 0
   m_Name: Swordfighters
   m_TagString: Untagged
@@ -409,17 +408,6 @@ Transform:
   - {fileID: 1391123759}
   m_Father: {fileID: 1693047347}
   m_RootOrder: 4
---- !u!114 &115572916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 115572914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a366a83a2a6b47346b9a588ed6872555, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &128491803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3687,7 +3675,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1693047348}
         m_MethodName: createSwordfighter
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4634,6 +4622,9 @@ MonoBehaviour:
   resourceCostsText: {fileID: 465985542}
   upgradeButton: {fileID: 990362992}
   initialWorkersPerLevel: 2
+  InputSwordFighter: {fileID: 2076046732}
+  InputArcher: {fileID: 0}
+  InputKnight: {fileID: 0}
   numberToCreateSwordfighters: 
   numberToCreateArchers: 
   numberToCreateKnights: 

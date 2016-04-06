@@ -30,7 +30,7 @@ namespace Village_TD
         {
             timer += Time.deltaTime;
             seconds = Convert.ToInt32(timer);
-            timerTextString = System.TimeSpan.FromSeconds(seconds).ToString(); //displays int in timenotation hh:mm:ss
+            timerTextString = TimeSpan.FromSeconds(seconds).ToString(); //displays int in timenotation hh:mm:ss
             timerText.text = timerTextString;
 
 
