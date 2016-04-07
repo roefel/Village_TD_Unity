@@ -92,6 +92,7 @@
     <Compile Include="Assets\Village_TD\Buildings\House.cs" />
     <Compile Include="Assets\Village_TD\Buildings\LumberMill.cs" />
     <Compile Include="Assets\Village_TD\Buildings\ResourceBuilding.cs" />
+    <Compile Include="Assets\Village_TD\Buildings\Tower.cs" />
     <Compile Include="Assets\Village_TD\Buildings\Wall.cs" />
     <Compile Include="Assets\Village_TD\Buildings\Warehouse.cs" />
     <Compile Include="Assets\Village_TD\Buildings\clayPit.cs" />
