@@ -70,7 +70,7 @@ namespace Village_TD
         {
             if(Level<maxLevel())
             {
-                resourceCostsText.text = "Clay[" + resourceCost[0].ToString() + "] Iron[" + resourceCost[1] + "] Wood[" + resourceCost[2] + "]";
+                resourceCostsText.text = "Clay[" + resourceCost[0].ToString() + "]\tIron[" + resourceCost[1] + "]\tWood[" + resourceCost[2] + "]";
 
             }
             else

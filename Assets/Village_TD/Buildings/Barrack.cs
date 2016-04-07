@@ -206,12 +206,12 @@ namespace Village_TD
         {
             if(Convert.ToInt32(numberToCreateSwordfighters)>0)
             {
-                swordfightersCost.text = "Clay[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[0]) + "] Iron[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[1]) + "] Wood[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[2]) + "]";
+                swordfightersCost.text = "Clay[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[0]) + "]\tIron[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[1]) + "]\tWood[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[2]) + "]";
 
             }
             else
             {
-                swordfightersCost.text = "Clay[" + swordfighterCost[0] + "] Iron[" + swordfighterCost[1] + "] Wood[" + swordfighterCost[2] + "]";
+                swordfightersCost.text = "Clay[" + swordfighterCost[0] + "]\tIron[" + swordfighterCost[1] + "]\tWood[" + swordfighterCost[2] + "]";
             }
         }
 
@@ -219,12 +219,12 @@ namespace Village_TD
         {
             if (Convert.ToInt32(numberToCreateArchers) > 0)
             {
-                archersCost.text = "Clay[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[0]) + "] Iron[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[1]) + "] Wood[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[2]) + "]";
+                archersCost.text = "Clay[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[0]) + "]\tIron[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[1]) + "]\tWood[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[2]) + "]";
 
             }
             else
             {
-                archersCost.text = "Clay[" + archerCost[0] + "] Iron[" + archerCost[1] + "] Wood[" + archerCost[2] + "]";
+                archersCost.text = "Clay[" + archerCost[0] + "]\tIron[" + archerCost[1] + "]\tWood[" + archerCost[2] + "]";
             }
         }
 
@@ -232,12 +232,12 @@ namespace Village_TD
         {
             if (Convert.ToInt32(numberToCreateKnights) > 0)
             {
-                knightsCost.text = "Clay[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[0]) + "] Iron[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[1]) + "] Wood[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[2]) + "]";
+                knightsCost.text = "Clay[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[0]) + "]\tIron[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[1]) + "]\tWood[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[2]) + "]";
 
             }
             else
             {
-                knightsCost.text = "Clay[" + knightCost[0] + "] Iron[" + knightCost[1] + "] Wood[" + knightCost[2] + "]";
+                knightsCost.text = "Clay[" + knightCost[0] + "]\tIron[" + knightCost[1] + "]\tWood[" + knightCost[2] + "]";
             }
         }
     }
