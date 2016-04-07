@@ -23,12 +23,7 @@ namespace Village_TD
         public Text gameWonText;
         public Text quitText;
 
-        
         bool gameStop;
-
-        private int swordfighterStrength = 1;
-        private int archerStrength = 2;
-        private int knightStrenght = 4;
 
         System.Random rnd = new System.Random();
         private int random;
@@ -52,14 +47,14 @@ namespace Village_TD
         // Use this for initialization
         void Start()
         {
-            countdownTimer = 5;
+            countdownTimer = 60;
             wave = 1;
             setWaveText();
             GameStop = false;
             gameOverText.text = "";
             restartText.text = "";
             gameWonText.text = "";
-            quitText.text = "";
+            quitText.text = "";        
         }
 
         // Update is called once per frame
@@ -72,34 +67,48 @@ namespace Village_TD
             {
                 timerText.text = timerTextString;
             }
-            if (seconds<=0)
+            if (seconds<=0 &&!GameStop)
             {
                 enemyAttack();
                 if(GameStop)
                 {
                     gameOverText.text = "Game Over";
-                    restartText.text = "Press 'R' to restart";
-                    quitText.text = "Press 'esc' to quit";
+                    Debug.Log("Game Over");
+
                 }
                 else
                 {
-                    countdownTimer = 5;
+                    countdownTimer = 30;
                     wave++;
-                    setWaveText();
+                    
                 }
-                if(wave==enemyTroopsPerWave.Length)
+                if(wave==enemyTroopsPerWave.Length+1)
                 {
                     GameStop= true;
-                    gameWonText.text = "You've Won!";
-                    restartText.text = "Press 'R' to restart";
-                    quitText.text = "Press 'esc' to quit";
+                    gameWonText.text = "You've Won!";                                       
                     Debug.Log("you've won");
                 }
-
+                else
+                {
+                    setWaveText();
+                }                  
             }
 
             if(gameStop)
             {
+                GameObject.Find("Barrack").GetComponent<Barrack>().upgradeButton.interactable = false;  //disable all buttons
+                GameObject.Find("ClayPit").GetComponent<clayPit>().upgradeButton.interactable = false;
+                GameObject.Find("IronMine").GetComponent<ironMine>().upgradeButton.interactable = false;
+                GameObject.Find("LumberMill").GetComponent<LumberMill>().upgradeButton.interactable = false;
+                GameObject.Find("House").GetComponent<House>().upgradeButton.interactable = false;
+                GameObject.Find("Tower").GetComponent<Tower>().upgradeButton.interactable = false;
+                GameObject.Find("Warehouse").GetComponent<Warehouse>().upgradeButton.interactable = false;
+                GameObject.Find("Wall").GetComponent<Wall>().upgradeButton.interactable = false;
+                GameObject.Find("Barrack").GetComponent<Barrack>().createArchers.interactable = false;
+                GameObject.Find("Barrack").GetComponent<Barrack>().createSwordfighters.interactable = false;
+                GameObject.Find("Barrack").GetComponent<Barrack>().createKnights.interactable = false;
+                restartText.text = "Press 'R' to restart";
+                quitText.text = "Press 'esc' to quit";
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     Debug.Log("restart");
@@ -117,7 +126,9 @@ namespace Village_TD
 
         void enemyAttack()
         {
-            if(enemyTroopsPerWave[wave-1] - GameObject.Find("Tower").GetComponent<Tower>().TroopsKilled <= (GameObject.Find("Barrack").GetComponent<Barrack>().NumSwordfighters*swordfighterStrength + GameObject.Find("Barrack").GetComponent<Barrack>().NumArchers*archerStrength + GameObject.Find("Barrack").GetComponent<Barrack>().NumKnights*knightStrenght))
+            
+            
+            if (enemyTroopsPerWave[wave-1] - GameObject.Find("Tower").GetComponent<Tower>().TroopsKilled <= GameObject.Find("Barrack").GetComponent<Barrack>().TotalStrength)
             {
                 enemiesLeft = enemyTroopsPerWave[wave - 1];
                 enemiesLeft -= GameObject.Find("Tower").GetComponent<Tower>().TroopsKilled;
@@ -130,7 +141,7 @@ namespace Village_TD
                             if (GameObject.Find("Barrack").GetComponent<Barrack>().NumSwordfighters > 0)
                             {
                                 GameObject.Find("Barrack").GetComponent<Barrack>().NumSwordfighters--;
-                                enemiesLeft -= 1 * swordfighterStrength;
+                                enemiesLeft -= 1 * GameObject.Find("Wall").GetComponent<Wall>().SwordfighterStrength;
                             }
 
                             break;
@@ -138,7 +149,7 @@ namespace Village_TD
                             if (GameObject.Find("Barrack").GetComponent<Barrack>().NumArchers > 0)
                             {
                                 GameObject.Find("Barrack").GetComponent<Barrack>().NumArchers--;
-                                enemiesLeft -= 1 * archerStrength;
+                                enemiesLeft -= 1 * GameObject.Find("Wall").GetComponent<Wall>().ArcherStrength;
                             }
 
                             break;
@@ -146,7 +157,7 @@ namespace Village_TD
                             if (GameObject.Find("Barrack").GetComponent<Barrack>().NumKnights > 0)
                             {
                                 GameObject.Find("Barrack").GetComponent<Barrack>().NumKnights--;
-                                enemiesLeft -= 1 * knightStrenght;
+                                enemiesLeft -= 1 * GameObject.Find("Wall").GetComponent<Wall>().KnightStrength;
                             }
 
                             break;
@@ -169,5 +180,7 @@ namespace Village_TD
             waveText.text = "Enemy troops next wave: " + enemyTroopsPerWave[wave - 1].ToString();
             numWaveText.text = "wave: " + wave.ToString();
         }
+
+
     }
 }

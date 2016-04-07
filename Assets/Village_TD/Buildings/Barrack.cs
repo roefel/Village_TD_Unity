@@ -12,8 +12,10 @@ namespace Village_TD
     {
         private int numSwordfighters;  
         private int numArchers;         
-        private int numKnights;         
+        private int numKnights;
+        private int totalStrength;
 
+        public Text totalStrengthText;
         public Text numSwordfightersText;
         public Text numArchersText;
         public Text numKnightsText;
@@ -50,6 +52,7 @@ namespace Village_TD
             setKnightsCostText();
             setSwordfightersCostText();
             unlockCombatant();
+            totalStrength = 0;
         }
 
         new void upgrade()
@@ -70,6 +73,7 @@ namespace Village_TD
             {
                 numSwordfighters = value;
                 setTroopsText();
+                setTotalStrength();
             }
         }
 
@@ -80,6 +84,7 @@ namespace Village_TD
             {
                 numArchers = value;
                 setTroopsText();
+                setTotalStrength();
             }
         }
 
@@ -90,10 +95,30 @@ namespace Village_TD
             {
                 numKnights = value;
                 setTroopsText();
+                setTotalStrength();
             }
         }
 
-        void unlockCombatant()
+        public int TotalStrength
+        {
+            get
+            {
+                return totalStrength;
+            }
+
+            set
+            {
+                totalStrength = value;
+            }
+        }
+
+        public void setTotalStrength()
+        {
+            TotalStrength = (NumSwordfighters * GameObject.Find("Wall").GetComponent<Wall>().SwordfighterStrength + NumArchers * GameObject.Find("Wall").GetComponent<Wall>().ArcherStrength + NumKnights * GameObject.Find("Wall").GetComponent<Wall>().KnightStrength);
+            totalStrengthText.text = "Total strength of troops: " + TotalStrength.ToString();
+        }
+
+    void unlockCombatant()
         {
             if(Level==3)
             {
@@ -132,6 +157,11 @@ namespace Village_TD
                 GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource -= (swordfighterCost[0] * Convert.ToInt32(numberToCreateSwordfighters));
                 GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= (swordfighterCost[1] * Convert.ToInt32(numberToCreateSwordfighters));
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= (swordfighterCost[2] * Convert.ToInt32(numberToCreateSwordfighters));
+                
+            }
+            else
+            {
+                Debug.Log("create of troops failed");
             }
         }
 

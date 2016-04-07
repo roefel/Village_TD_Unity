@@ -10,7 +10,7 @@ namespace Village_TD
     class ResourceBuilding:Building
     {
 
-        public static readonly int[] numLevelPerSec = { 5000, 10, 20, 40, 80, 160, 320, 640, 1000 };//array to define number of resources gained per second
+        public static readonly int[] numLevelPerSec = { 5, 10, 20, 40, 80, 160, 320, 640, 1000 };//array to define number of resources gained per second
 
         public override int maxLevel()
         {
@@ -61,6 +61,11 @@ namespace Village_TD
 
         void raiseResource()    //method to add resources gained per second to current number of resources
         {
+            if(GameObject.Find("Game").GetComponent<Game>().GameStop)
+            {
+                CancelInvoke();
+            }
+
             int maxStorage = GameObject.Find("Warehouse").GetComponent<Warehouse>().MaxStorage; //places the current Warehouse.maxStorage in local maxStorage
 
             if (NumberOfResource >= maxStorage)
