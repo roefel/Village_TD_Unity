@@ -9,15 +9,34 @@ namespace Village_TD
 {
     class House:Building
     {
-        private int numWorkers;
+        //private int numWorkers;
         private int numPopulation;
         public static readonly int[] maxLevelPopulations = { 25, 50, 100, 200, 350, 500, 700, 950, 1200, 1500 };//array om te bepalen bij welk level, welke maximum populatie telt
+        public Text maxPopulationText;
+        public Text currentPopulationText;
 
-        public int NumWorkers
+        public int swordfighterPopulationFactor = 1;
+        public int archerPopulationFactor = 1;
+        public int knightPopulationFactor = 2;
+        //public int NumWorkers
+        //{
+        //    get { return numWorkers; }
+        //    set { numWorkers = value; }
+        //}
+
+        new void Start()
         {
-            get { return numWorkers; }
-            set { numWorkers = value; }
+            base.Start();
+            setMaxPopulationText();
+            setCurrentPopulationText();
         }
+
+        new void upgrade()
+        {
+            base.upgrade();
+            setMaxPopulationText();
+        }
+
         public int NumPopulation
         {
             get { return numPopulation; }
@@ -34,30 +53,32 @@ namespace Village_TD
             get
             {
                 return maxLevelPopulations[Level - 1];
-            }   
+                
+            }
         }
 
-        void setNumWorkers()
+        void setMaxPopulationText()
         {
-            /*
-            //aantal werknemers van elk gebouw ophalen, ergens in het project
-            AmWorkers = GameObject.Find("workers").GetComponent<Barrack>().initialWorkersPerLevel   //aantal werknemers per level van een kazerne
-            + GameObject.Find("workers").GetComponent<House>().initialWorkersPerLevel               //aantal werknemers per level van een huis
-            + GameObject.Find("workers").GetComponent<Warehouse>().initialWorkersPerLevel           //aantal werknemers per level van de opslagplaats
-            + GameObject.Find("workers").GetComponent<clayPit>().initialWorkersPerLevel             //aantal werknemers per level van een clay
-            + GameObject.Find("workers").GetComponent<ironMine>().initialWorkersPerLevel            //aantal werknemers per level van een iron
-            + GameObject.Find("workers").GetComponent<LumberMill>().initialWorkersPerLevel;         //aantal werknemers per level van een wood
-            */
+            maxPopulationText.text = "Maximum population: " + MaxPopulation.ToString();
         }
 
-        void setNumPopulation()
+        //void setNumWorkers()
+        //{
+        //    /*
+        //    //aantal werknemers van elk gebouw ophalen, ergens in het project
+        //    AmWorkers = GameObject.Find("workers").GetComponent<Barrack>().initialWorkersPerLevel   //aantal werknemers per level van een kazerne
+        //    + GameObject.Find("workers").GetComponent<House>().initialWorkersPerLevel               //aantal werknemers per level van een huis
+        //    + GameObject.Find("workers").GetComponent<Warehouse>().initialWorkersPerLevel           //aantal werknemers per level van de opslagplaats
+        //    + GameObject.Find("workers").GetComponent<clayPit>().initialWorkersPerLevel             //aantal werknemers per level van een clay
+        //    + GameObject.Find("workers").GetComponent<ironMine>().initialWorkersPerLevel            //aantal werknemers per level van een iron
+        //    + GameObject.Find("workers").GetComponent<LumberMill>().initialWorkersPerLevel;         //aantal werknemers per level van een wood
+        //    */
+        //}
+
+        public void setCurrentPopulationText()
         {
-            /*
-            amPopulation = GameObject.Find("amTroops").GetComponent<Combatant>().AmTroops;
-            //    + GameObject.Find("amWorkers").GetComponent<Worker>().AmWorkers;
-            //amPopulation = 10;      //-------------TEST--------------//
-            population.text = "Total amount population: " + amPopulation.ToString();
-            */
+            NumPopulation = GameObject.Find("Barrack").GetComponent<Barrack>().NumSwordfighters*swordfighterPopulationFactor + GameObject.Find("Barrack").GetComponent<Barrack>().NumArchers*archerPopulationFactor + GameObject.Find("Barrack").GetComponent<Barrack>().NumKnights*knightPopulationFactor;
+            currentPopulationText.text = "Current population: " + NumPopulation.ToString();
         }
 
 

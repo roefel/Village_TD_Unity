@@ -17,7 +17,7 @@ namespace Village_TD
         public Button upgradeButton;    //variable of type Button, used for changing the button state in Unity
         
         
-        private int initialClayCostForUpgrade = 11;  //initial cost per material. This can be modified individually.
+        private int initialClayCostForUpgrade = 12;  //initial cost per material. This can be modified individually.
         private int initialIronCostForUpgrade = 9;
         private int initialWoodCostForUpgrade = 10;
         public int initialWorkersPerLevel = 2;
@@ -68,8 +68,15 @@ namespace Village_TD
         }
         void setCostText()
         {
-            
-            resourceCostsText.text = "Clay[" + resourceCost[0].ToString() + "] Iron[" + resourceCost[1] + "] Wood[" + resourceCost[2] + "]";
+            if(Level<maxLevel())
+            {
+                resourceCostsText.text = "Clay[" + resourceCost[0].ToString() + "] Iron[" + resourceCost[1] + "] Wood[" + resourceCost[2] + "]";
+
+            }
+            else
+            {
+                resourceCostsText.text = "Maximum Level Reached";
+            }
         }
 
         void setResourceCost()
@@ -102,13 +109,13 @@ namespace Village_TD
 
         }
         
-        private void updateButton() //method to disable button  if max level is reached for a building
+        void updateButton() //method to disable button  if max level is reached for a building
         {
             if (Level >= maxLevel())
             {
                 upgradeButton.interactable = false;
                 buttonText.text = "Max Lvl";
-
+               
             }
 
         }

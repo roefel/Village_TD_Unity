@@ -20,7 +20,9 @@ namespace Village_TD
         public Text swordfightersCost;
         public Text archersCost;
         public Text knightsCost;
-
+        public Button createSwordfighters;
+        public Button createArchers;
+        public Button createKnights;
 
         private readonly int[] swordfighterCost = { 75, 80, 60 }; //element 0 = clay, element 1 = iron, element 2 = wood
         private readonly int[] archerCost = { 70, 100, 150 };
@@ -44,6 +46,16 @@ namespace Village_TD
             NumSwordfighters = 0;
             NumArchers = 0;
             NumKnights = 0;
+            setArchersCostText();
+            setKnightsCostText();
+            setSwordfightersCostText();
+            unlockCombatant();
+        }
+
+        new void upgrade()
+        {
+            base.upgrade();
+            unlockCombatant();
         }
 
         public override int maxLevel()
@@ -81,6 +93,28 @@ namespace Village_TD
             }
         }
 
+        void unlockCombatant()
+        {
+            if(Level==3)
+            {
+                createKnights.interactable = true;
+                
+            }
+
+            else if(Level==2)
+            {
+                
+                createArchers.interactable = true;
+                
+            }
+            else if(Level==1)
+            {
+                createKnights.interactable = false;
+                createArchers.interactable = false;
+                
+            }
+        }
+
         void setTroopsText()
         {
             numSwordfightersText.text = NumSwordfighters.ToString();
@@ -91,7 +125,8 @@ namespace Village_TD
         public void createSwordfighter()
         {
             getResources();
-            if(numberOfClay >= (swordfighterCost[0]* Convert.ToInt32(numberToCreateSwordfighters)) && numberOfIron >= (swordfighterCost[1]* Convert.ToInt32(numberToCreateSwordfighters)) && numberOfWood >= (swordfighterCost[2]* Convert.ToInt32(numberToCreateSwordfighters)))
+            if(numberOfClay >= (swordfighterCost[0]* Convert.ToInt32(numberToCreateSwordfighters)) && numberOfIron >= (swordfighterCost[1]* Convert.ToInt32(numberToCreateSwordfighters)) && numberOfWood >= (swordfighterCost[2]* Convert.ToInt32(numberToCreateSwordfighters))
+                && GameObject.Find("House").GetComponent<House>().MaxPopulation >= GameObject.Find("House").GetComponent<House>().NumPopulation + Convert.ToInt32(numberToCreateSwordfighters) * GameObject.Find("House").GetComponent<House>().swordfighterPopulationFactor)
             {
                 NumSwordfighters += Convert.ToInt32(numberToCreateSwordfighters);
                 GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource -= (swordfighterCost[0] * Convert.ToInt32(numberToCreateSwordfighters));
@@ -100,21 +135,16 @@ namespace Village_TD
             }
             else
             {
-                Debug.Log("insufficient resources");
+                Debug.Log("insufficient resources or population space left");
             }
             Debug.Log(NumSwordfighters);
         }
 
-        public void inputFieldSwordFighters()
-         {   
-            numberToCreateSwordfighters = InputSwordFighter.GetComponent<InputField>().text;
-            Debug.Log(numberToCreateSwordfighters);
-         }
-
         public void createArcher()
         {
             getResources();
-            if (numberOfClay >= (archerCost[0] * Convert.ToInt32(numberToCreateArchers)) && numberOfIron >= (archerCost[1] * Convert.ToInt32(numberToCreateArchers)) && numberOfWood >= (archerCost[2] * Convert.ToInt32(numberToCreateArchers)))
+            if (numberOfClay >= (archerCost[0] * Convert.ToInt32(numberToCreateArchers)) && numberOfIron >= (archerCost[1] * Convert.ToInt32(numberToCreateArchers)) && numberOfWood >= (archerCost[2] * Convert.ToInt32(numberToCreateArchers))
+                 && GameObject.Find("House").GetComponent<House>().MaxPopulation >= GameObject.Find("House").GetComponent<House>().NumPopulation + Convert.ToInt32(numberToCreateArchers) * GameObject.Find("House").GetComponent<House>().archerPopulationFactor)
             {
                 NumArchers += Convert.ToInt32(numberToCreateArchers);
                 GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource -= (archerCost[0] * Convert.ToInt32(numberToCreateArchers));
@@ -123,22 +153,17 @@ namespace Village_TD
             }
             else
             {
-                Debug.Log("insufficient resources");
+                Debug.Log("insufficient resources or population space left");
             }
             
            Debug.Log(NumArchers);
         }
 
-        public void inputFieldArchers()
-        {
-            numberToCreateArchers = InputArcher.GetComponent<InputField>().text;
-            Debug.Log(numberToCreateSwordfighters);
-        }
-
         public void createKnight()
         {
             getResources();
-            if (numberOfClay >= (knightCost[0] * Convert.ToInt32(numberToCreateKnights)) && numberOfIron >= (knightCost[1] * Convert.ToInt32(numberToCreateKnights)) && numberOfWood >= (knightCost[2] * Convert.ToInt32(numberToCreateKnights)))
+            if (numberOfClay >= (knightCost[0] * Convert.ToInt32(numberToCreateKnights)) && numberOfIron >= (knightCost[1] * Convert.ToInt32(numberToCreateKnights)) && numberOfWood >= (knightCost[2] * Convert.ToInt32(numberToCreateKnights))
+                && GameObject.Find("House").GetComponent<House>().MaxPopulation >= GameObject.Find("House").GetComponent<House>().NumPopulation + Convert.ToInt32(numberToCreateKnights) * GameObject.Find("House").GetComponent<House>().knightPopulationFactor)
             {
                 NumKnights += Convert.ToInt32(numberToCreateKnights);
                 GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource -= (knightCost[0] * Convert.ToInt32(numberToCreateKnights));
@@ -147,17 +172,27 @@ namespace Village_TD
             }
             else
             {
-                Debug.Log("insufficient resources");
+                Debug.Log("insufficient resources or population space left");
             }
             Debug.Log(NumKnights);
         }
 
+        public void inputFieldSwordFighters()
+        {
+            numberToCreateSwordfighters = InputSwordFighter.GetComponent<InputField>().text;
+            Debug.Log(numberToCreateSwordfighters);
+        }
+
+        public void inputFieldArchers()
+        {
+            numberToCreateArchers = InputArcher.GetComponent<InputField>().text;
+            Debug.Log(numberToCreateSwordfighters);
+        }
+
         public void inputFieldKnights()
         {
-
             numberToCreateKnights = InputKnight.GetComponent<InputField>().text;
             Debug.Log(numberToCreateKnights);
-
         }
 
         void getResources()
@@ -167,9 +202,43 @@ namespace Village_TD
             numberOfWood = GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource;
         }
 
-        public void setTroopsCostText()
+        public void setSwordfightersCostText()
         {
+            if(Convert.ToInt32(numberToCreateSwordfighters)>0)
+            {
+                swordfightersCost.text = "Clay[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[0]) + "] Iron[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[1]) + "] Wood[" + (Convert.ToInt32(numberToCreateSwordfighters) * swordfighterCost[2]) + "]";
 
+            }
+            else
+            {
+                swordfightersCost.text = "Clay[" + swordfighterCost[0] + "] Iron[" + swordfighterCost[1] + "] Wood[" + swordfighterCost[2] + "]";
+            }
+        }
+
+        public void setArchersCostText()
+        {
+            if (Convert.ToInt32(numberToCreateArchers) > 0)
+            {
+                archersCost.text = "Clay[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[0]) + "] Iron[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[1]) + "] Wood[" + (Convert.ToInt32(numberToCreateArchers) * archerCost[2]) + "]";
+
+            }
+            else
+            {
+                archersCost.text = "Clay[" + archerCost[0] + "] Iron[" + archerCost[1] + "] Wood[" + archerCost[2] + "]";
+            }
+        }
+
+        public void setKnightsCostText()
+        {
+            if (Convert.ToInt32(numberToCreateKnights) > 0)
+            {
+                knightsCost.text = "Clay[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[0]) + "] Iron[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[1]) + "] Wood[" + (Convert.ToInt32(numberToCreateKnights) * knightCost[2]) + "]";
+
+            }
+            else
+            {
+                knightsCost.text = "Clay[" + knightCost[0] + "] Iron[" + knightCost[1] + "] Wood[" + knightCost[2] + "]";
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Village_TD
     class Warehouse:Building
     {
 
-        public static readonly int[] maxLevelStorage = { 300, 1200, 4800};//array for defining max warehouse capacity per level
+        public static readonly int[] maxLevelStorage = { 300, 1200, 4800, 9600, 20000, 30000};//array for defining max warehouse capacity per level
 
         public override int maxLevel() // maxLevel is defined with the lenght of the array maxLevelStorage
         {

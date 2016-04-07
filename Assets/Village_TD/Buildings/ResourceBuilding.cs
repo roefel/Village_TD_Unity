@@ -9,8 +9,8 @@ namespace Village_TD
 {
     class ResourceBuilding:Building
     {
-        
-        public static readonly int[] numLevelPerSec = { 5, 10, 20, 40, 80};//array to define number of resources gained per second
+
+        public static readonly int[] numLevelPerSec = { 5, 10, 20, 40, 80, 120, 160, 220, 260, 300 };//array to define number of resources gained per second
 
         public override int maxLevel()
         {
