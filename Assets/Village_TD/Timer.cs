@@ -21,17 +21,18 @@ namespace Village_TD
         void Start()
         {
             timer = 0;
-            
-
         }
 
         // Update is called once per frame
         void Update()
         {
-            timer += Time.deltaTime;
-            seconds = Convert.ToInt32(timer);
-            timerTextString = TimeSpan.FromSeconds(seconds).ToString(); //displays int in timenotation hh:mm:ss
-            timerText.text = timerTextString;
+            if(!GameObject.Find("Game").GetComponent<Game>().GameStop)
+            {
+                timer += Time.deltaTime;
+                seconds = Convert.ToInt32(timer);
+                timerTextString = TimeSpan.FromSeconds(seconds).ToString(); //displays int in timenotation hh:mm:ss
+                timerText.text = timerTextString;
+            }
 
 
 

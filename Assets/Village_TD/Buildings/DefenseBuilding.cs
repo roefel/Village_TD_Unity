@@ -9,12 +9,6 @@ namespace Village_TD
 {
     class DefenseBuilding:Building
     {
-        int defenseFactor;
 
-        public int DefenseFactor
-        {
-            get{return defenseFactor;}
-            set{defenseFactor = value;}
-        }
     }
 }

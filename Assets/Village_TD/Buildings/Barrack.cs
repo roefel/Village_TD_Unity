@@ -10,9 +10,9 @@ namespace Village_TD
 {
     class Barrack:Building
     {
-        private int numSwordfighters;   //temporary value
-        private int numArchers;         //temporary value
-        private int numKnights;         //temporary value
+        private int numSwordfighters;  
+        private int numArchers;         
+        private int numKnights;         
 
         public Text numSwordfightersText;
         public Text numArchersText;
@@ -24,7 +24,7 @@ namespace Village_TD
         public Button createArchers;
         public Button createKnights;
 
-        private readonly int[] swordfighterCost = { 75, 80, 60 }; //element 0 = clay, element 1 = iron, element 2 = wood
+        private readonly int[] swordfighterCost = { 45, 70, 25 }; //element 0 = clay, element 1 = iron, element 2 = wood
         private readonly int[] archerCost = { 70, 100, 150 };
         private readonly int[] knightCost = { 200, 350, 250 };
 
@@ -125,7 +125,7 @@ namespace Village_TD
         public void createSwordfighter()
         {
             getResources();
-            if(numberOfClay >= (swordfighterCost[0]* Convert.ToInt32(numberToCreateSwordfighters)) && numberOfIron >= (swordfighterCost[1]* Convert.ToInt32(numberToCreateSwordfighters)) && numberOfWood >= (swordfighterCost[2]* Convert.ToInt32(numberToCreateSwordfighters))
+            if (numberOfClay >= (swordfighterCost[0] * Convert.ToInt32(numberToCreateSwordfighters)) && numberOfIron >= (swordfighterCost[1] * Convert.ToInt32(numberToCreateSwordfighters)) && numberOfWood >= (swordfighterCost[2] * Convert.ToInt32(numberToCreateSwordfighters))
                 && GameObject.Find("House").GetComponent<House>().MaxPopulation >= GameObject.Find("House").GetComponent<House>().NumPopulation + Convert.ToInt32(numberToCreateSwordfighters) * GameObject.Find("House").GetComponent<House>().swordfighterPopulationFactor)
             {
                 NumSwordfighters += Convert.ToInt32(numberToCreateSwordfighters);
@@ -133,11 +133,6 @@ namespace Village_TD
                 GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= (swordfighterCost[1] * Convert.ToInt32(numberToCreateSwordfighters));
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= (swordfighterCost[2] * Convert.ToInt32(numberToCreateSwordfighters));
             }
-            else
-            {
-                Debug.Log("insufficient resources or population space left");
-            }
-            Debug.Log(NumSwordfighters);
         }
 
         public void createArcher()
@@ -151,12 +146,6 @@ namespace Village_TD
                 GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= (archerCost[1] * Convert.ToInt32(numberToCreateArchers));
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= (archerCost[2] * Convert.ToInt32(numberToCreateArchers));
             }
-            else
-            {
-                Debug.Log("insufficient resources or population space left");
-            }
-            
-           Debug.Log(NumArchers);
         }
 
         public void createKnight()
@@ -170,11 +159,6 @@ namespace Village_TD
                 GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= (knightCost[1] * Convert.ToInt32(numberToCreateKnights));
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= (knightCost[2] * Convert.ToInt32(numberToCreateKnights));
             }
-            else
-            {
-                Debug.Log("insufficient resources or population space left");
-            }
-            Debug.Log(NumKnights);
         }
 
         public void inputFieldSwordFighters()

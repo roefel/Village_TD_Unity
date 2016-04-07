@@ -19,15 +19,14 @@ namespace Village_TD
         
         private int initialClayCostForUpgrade = 12;  //initial cost per material. This can be modified individually.
         private int initialIronCostForUpgrade = 9;
-        private int initialWoodCostForUpgrade = 10;
-        public int initialWorkersPerLevel = 2;
+        private int initialWoodCostForUpgrade = 10;        
         private int multiplierInitialCost;          //Multiplier that is used to calulate the cost of each material for each level
         public void multiplierInitialCostAlgorythm()
         {
 
             Double LevelDouble = Convert.ToDouble(Level);  //convert int Level to Double for use in math.pow
             int exponentialMultiplier = System.Convert.ToInt32(Math.Pow(LevelDouble, 2)); //sets the exponantial multiplier of the level to the power of 2(needs to be converted from double to int
-            multiplierInitialCost = 5 * exponentialMultiplier; //sets the multiplier for the initial cost to calculate the cost for each level
+            multiplierInitialCost = 4 * exponentialMultiplier; //sets the multiplier for the initial cost to calculate the cost for each level
         }
         int[] resourceCost = new int[3];//element 0=clay, element 1=iron, element 2=wood
 
