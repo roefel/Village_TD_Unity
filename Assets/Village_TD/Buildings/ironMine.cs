@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Village_TD
 {
-    class ironMine:ResourceBuilding
+    class IronMine:ResourceBuilding
     {
         
     }

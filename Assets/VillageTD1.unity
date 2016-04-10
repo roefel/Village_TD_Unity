@@ -2005,7 +2005,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1572722605}
+      - m_Target: {fileID: 1572722604}
         m_MethodName: upgrade
         m_Mode: 1
         m_Arguments:
@@ -3821,7 +3821,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 957724209}
-  - 114: {fileID: 957724211}
+  - 114: {fileID: 957724210}
   m_Layer: 0
   m_Name: IronMine
   m_TagString: Untagged
@@ -3847,7 +3847,7 @@ Transform:
   - {fileID: 274428879}
   m_Father: {fileID: 1478351926}
   m_RootOrder: 4
---- !u!114 &957724211
+--- !u!114 &957724210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -4401,7 +4401,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 957724211}
+      - m_Target: {fileID: 957724210}
         m_MethodName: upgrade
         m_Mode: 1
         m_Arguments:
@@ -6352,7 +6352,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1572722603}
-  - 114: {fileID: 1572722605}
+  - 114: {fileID: 1572722604}
   m_Layer: 0
   m_Name: ClayPit
   m_TagString: Untagged
@@ -6378,7 +6378,7 @@ Transform:
   - {fileID: 2029650363}
   m_Father: {fileID: 1478351926}
   m_RootOrder: 3
---- !u!114 &1572722605
+--- !u!114 &1572722604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}

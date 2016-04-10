@@ -10,12 +10,14 @@ namespace Village_TD
 {
     class Barrack:Building
     {
-        private int numSwordfighters;  
-        private int numArchers;         
-        private int numKnights;
-        private int totalStrength;
+        private int numSwordfighters;   //number of swordfighters created and alive
+        private int numArchers;         // " " archers "
+        private int numKnights;         // " " knights "
+        private int totalStrength;      //total strength of the current troops
+        private int numOfUniqueTroops = 3;
+        private int defaultStartValue = 0;  //default start value used in start() method to (re)set values to 0
 
-        public Text totalStrengthText;
+        public Text totalStrengthText;  //text variables to display in unity
         public Text numSwordfightersText;
         public Text numArchersText;
         public Text numKnightsText;
@@ -30,32 +32,32 @@ namespace Village_TD
         private readonly int[] archerCost = { 70, 100, 150 };
         private readonly int[] knightCost = { 200, 350, 250 };
 
-        public GameObject InputSwordFighter;
+        public GameObject InputSwordFighter;    //inputfields for creating of troops
         public GameObject InputArcher;
         public GameObject InputKnight;
 
-        private string numberToCreateSwordfighters;
+        private string numberToCreateSwordfighters; //text given back from the inputfields
         private string numberToCreateArchers;
         private string numberToCreateKnights;
 
-        int numberOfClay;
+        int numberOfClay;   //local 'temporary' storage for the number of resources
         int numberOfIron;
         int numberOfWood;
 
-        new void Start()
+        new void Start()    //called at start of the game
         {
             base.Start();
-            NumSwordfighters = 0;
-            NumArchers = 0;
-            NumKnights = 0;
+            NumSwordfighters = defaultStartValue;
+            NumArchers = defaultStartValue;
+            NumKnights = defaultStartValue;
             setArchersCostText();
             setKnightsCostText();
             setSwordfightersCostText();
             unlockCombatant();
-            totalStrength = 0;
+            totalStrength = defaultStartValue;
         }
 
-        new void upgrade()
+        new void upgrade()  //calles when the upgradebutton for barrack is pressed
         {
             base.upgrade();
             unlockCombatant();
@@ -63,10 +65,10 @@ namespace Village_TD
 
         public override int maxLevel()
         {
-            return 3; // The number 3 is dependable on the number of unique type of troops, 1 type is unlocked each level
+            return numOfUniqueTroops;   // sets maxlevel based on number of unique troops
         }
 
-        public int NumSwordfighters
+        public int NumSwordfighters //property of numSwordfighters
         {
             get{ return numSwordfighters; }
             set
@@ -77,7 +79,7 @@ namespace Village_TD
             }
         }
 
-        public int NumArchers
+        public int NumArchers   //property of numArchers
         {
             get { return numArchers; }
             set
@@ -88,7 +90,7 @@ namespace Village_TD
             }
         }
 
-        public int NumKnights
+        public int NumKnights //property of numKnights
         {
             get { return numKnights; }
             set
@@ -99,7 +101,7 @@ namespace Village_TD
             }
         }
 
-        public int TotalStrength
+        public int TotalStrength //property of totalStrength
         {
             get
             {
@@ -112,13 +114,13 @@ namespace Village_TD
             }
         }
 
-        public void setTotalStrength()
+        public void setTotalStrength()  //method to calculate the total strength of the amount of troops and update the text in unity
         {
             TotalStrength = (NumSwordfighters * GameObject.Find("Wall").GetComponent<Wall>().SwordfighterStrength + NumArchers * GameObject.Find("Wall").GetComponent<Wall>().ArcherStrength + NumKnights * GameObject.Find("Wall").GetComponent<Wall>().KnightStrength);
             totalStrengthText.text = "Total strength of troops: " + TotalStrength.ToString();
         }
 
-    void unlockCombatant()
+    void unlockCombatant()  //enables the button so next combatant is unlocked at next level
         {
             if(Level==3)
             {
@@ -140,83 +142,76 @@ namespace Village_TD
             }
         }
 
-        void setTroopsText()
+        void setTroopsText()    //method to set the number of troops text in unity
         {
             numSwordfightersText.text = NumSwordfighters.ToString();
             numArchersText.text = NumArchers.ToString();
             numKnightsText.text = NumKnights.ToString();
         }
 
-        public void createSwordfighter()
+        public void createSwordfighter() //method to check if the requirements are met to create a certain amount of swordfighters and creates them
         {
             getResources();
             if (numberOfClay >= (swordfighterCost[0] * Convert.ToInt32(numberToCreateSwordfighters)) && numberOfIron >= (swordfighterCost[1] * Convert.ToInt32(numberToCreateSwordfighters)) && numberOfWood >= (swordfighterCost[2] * Convert.ToInt32(numberToCreateSwordfighters))
                 && GameObject.Find("House").GetComponent<House>().MaxPopulation >= GameObject.Find("House").GetComponent<House>().NumPopulation + Convert.ToInt32(numberToCreateSwordfighters) * GameObject.Find("House").GetComponent<House>().swordfighterPopulationFactor)
             {
                 NumSwordfighters += Convert.ToInt32(numberToCreateSwordfighters);
-                GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource -= (swordfighterCost[0] * Convert.ToInt32(numberToCreateSwordfighters));
-                GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= (swordfighterCost[1] * Convert.ToInt32(numberToCreateSwordfighters));
+                GameObject.Find("ClayPit").GetComponent<ClayPit>().NumberOfResource -= (swordfighterCost[0] * Convert.ToInt32(numberToCreateSwordfighters));
+                GameObject.Find("IronMine").GetComponent<IronMine>().NumberOfResource -= (swordfighterCost[1] * Convert.ToInt32(numberToCreateSwordfighters));
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= (swordfighterCost[2] * Convert.ToInt32(numberToCreateSwordfighters));
                 
             }
-            else
-            {
-                Debug.Log("create of troops failed");
-            }
         }
 
-        public void createArcher()
+        public void createArcher() //method to check if the requirements are met to create a certain amount of archers and creates them
         {
             getResources();
             if (numberOfClay >= (archerCost[0] * Convert.ToInt32(numberToCreateArchers)) && numberOfIron >= (archerCost[1] * Convert.ToInt32(numberToCreateArchers)) && numberOfWood >= (archerCost[2] * Convert.ToInt32(numberToCreateArchers))
                  && GameObject.Find("House").GetComponent<House>().MaxPopulation >= GameObject.Find("House").GetComponent<House>().NumPopulation + Convert.ToInt32(numberToCreateArchers) * GameObject.Find("House").GetComponent<House>().archerPopulationFactor)
             {
                 NumArchers += Convert.ToInt32(numberToCreateArchers);
-                GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource -= (archerCost[0] * Convert.ToInt32(numberToCreateArchers));
-                GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= (archerCost[1] * Convert.ToInt32(numberToCreateArchers));
+                GameObject.Find("ClayPit").GetComponent<ClayPit>().NumberOfResource -= (archerCost[0] * Convert.ToInt32(numberToCreateArchers));
+                GameObject.Find("IronMine").GetComponent<IronMine>().NumberOfResource -= (archerCost[1] * Convert.ToInt32(numberToCreateArchers));
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= (archerCost[2] * Convert.ToInt32(numberToCreateArchers));
             }
         }
 
-        public void createKnight()
+        public void createKnight() //method to check if the requirements are met to create a certain amount of knights and creates them
         {
             getResources();
             if (numberOfClay >= (knightCost[0] * Convert.ToInt32(numberToCreateKnights)) && numberOfIron >= (knightCost[1] * Convert.ToInt32(numberToCreateKnights)) && numberOfWood >= (knightCost[2] * Convert.ToInt32(numberToCreateKnights))
                 && GameObject.Find("House").GetComponent<House>().MaxPopulation >= GameObject.Find("House").GetComponent<House>().NumPopulation + Convert.ToInt32(numberToCreateKnights) * GameObject.Find("House").GetComponent<House>().knightPopulationFactor)
             {
                 NumKnights += Convert.ToInt32(numberToCreateKnights);
-                GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource -= (knightCost[0] * Convert.ToInt32(numberToCreateKnights));
-                GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource -= (knightCost[1] * Convert.ToInt32(numberToCreateKnights));
+                GameObject.Find("ClayPit").GetComponent<ClayPit>().NumberOfResource -= (knightCost[0] * Convert.ToInt32(numberToCreateKnights));
+                GameObject.Find("IronMine").GetComponent<IronMine>().NumberOfResource -= (knightCost[1] * Convert.ToInt32(numberToCreateKnights));
                 GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource -= (knightCost[2] * Convert.ToInt32(numberToCreateKnights));
             }
         }
 
-        public void inputFieldSwordFighters()
-        {
+        public void inputFieldSwordFighters()   // 3 methods that get called on value change of their inputfield that they're assigned to
+        {                                       // the method updates the number to create a certain troop so it can be used to create them
             numberToCreateSwordfighters = InputSwordFighter.GetComponent<InputField>().text;
-            Debug.Log(numberToCreateSwordfighters);
         }
 
         public void inputFieldArchers()
         {
             numberToCreateArchers = InputArcher.GetComponent<InputField>().text;
-            Debug.Log(numberToCreateSwordfighters);
         }
 
         public void inputFieldKnights()
         {
             numberToCreateKnights = InputKnight.GetComponent<InputField>().text;
-            Debug.Log(numberToCreateKnights);
         }
 
-        void getResources()
+        void getResources() //gets the current amount of resources to be used in the create'combatant' method
         {
-            numberOfClay = GameObject.Find("ClayPit").GetComponent<clayPit>().NumberOfResource; //calls for the variable NumberOfResource 
-            numberOfIron = GameObject.Find("IronMine").GetComponent<ironMine>().NumberOfResource;
+            numberOfClay = GameObject.Find("ClayPit").GetComponent<ClayPit>().NumberOfResource; //calls for the variable NumberOfResource 
+            numberOfIron = GameObject.Find("IronMine").GetComponent<IronMine>().NumberOfResource;
             numberOfWood = GameObject.Find("LumberMill").GetComponent<LumberMill>().NumberOfResource;
         }
 
-        public void setSwordfightersCostText()
+        public void setSwordfightersCostText()  //3 similar methods to update the cost text to create troops dependable on the input
         {
             if(Convert.ToInt32(numberToCreateSwordfighters)>0)
             {

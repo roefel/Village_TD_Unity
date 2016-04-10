@@ -7,12 +7,8 @@ using UnityEngine.UI;
 
 namespace Village_TD
 {
-    class clayPit:ResourceBuilding
+    class ClayPit:ResourceBuilding
     {
-        
-        
-
-        
 
     }
 }
